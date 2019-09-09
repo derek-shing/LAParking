@@ -1,1 +1,1 @@
-web: gunicorn laparking.py -t 120
+web: gunicorn laparking:app -t 120
