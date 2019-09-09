@@ -1,0 +1,1 @@
+web: gunicorn LAParking:app -t 120

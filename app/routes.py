@@ -1,6 +1,5 @@
 from app import app
 from flask import render_template
-import folium
 from folium import plugins
 import requests
 import pandas as pd
