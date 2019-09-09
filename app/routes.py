@@ -6,6 +6,9 @@ import requests
 import pandas as pd
 from ast import literal_eval as make_tuple
 import os
+from app.addressform import AddressForm
+from flask import request
+from app.meter_map import Meter_Map
 
 path =os.getcwd()
 
@@ -29,3 +32,12 @@ def index():
         folium.Marker(point).add_to(m)
     #return render_template('index.html', title="LA Parking Space", content=m)
     return m.get_root().render()
+
+
+@app.route('/address',methods=['GET', 'POST'])
+def inputaddress():
+    form = AddressForm()
+    if request.method=='POST':
+        m=Meter_Map(request.values['address'])
+        return m.render().get_root().render()
+    return render_template('addressinput.html',form = form)
