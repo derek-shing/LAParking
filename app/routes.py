@@ -18,7 +18,7 @@ from app.meter_map import Meter_Map
 #y = -118.268751
 #m = folium.Map(location=[x, y])
 #final_df = pd.read_csv(path+'/Parking_Meter_Inventory.csv')
-3final_df = final_df.dropna(axis=0, subset=['LatLng'])
+#final_df = final_df.dropna(axis=0, subset=['LatLng'])
 
 #final_df['LatLng'] = final_df['LatLng'].apply(make_tuple)
 #test_df = final_df.head(20)
