@@ -34,8 +34,17 @@ class Meter_Map():
 
     def render(self):
         self.m = folium.Map(location=[self.location.latitude, self.location.longitude], zoom_start=16)
+        folium.Marker(
+            (self.location.latitude, self.location.longitude),
+            icon=folium.Icon(color='red'),
+            popup='Address: '+self.address
+        ).add_to(self.m)
+
         for index, row in self.display_df.iterrows():
-            folium.Marker((row['LatLng'][0], row['LatLng'][1])).add_to(self.m)
+            folium.Marker(
+                (row['LatLng'][0], row['LatLng'][1]),
+                popup='Address: '+row['BlockFace']+'\n Last Updated: '+row['eventtime']
+            ).add_to(self.m)
         return self.m
 
     def set_address(self, address):
