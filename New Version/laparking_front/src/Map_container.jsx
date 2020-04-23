@@ -1,4 +1,4 @@
-import React ,{Component} from 'react';
+import React ,{useState, useEffect} from 'react';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 //const https =require('https');
@@ -15,7 +15,9 @@ L.Icon.Default.mergeOptions({
 });
 
 function Map_container(){
-  const position = [34.057219, -118.268751]
+  const [meter,setMeter] = useState([]);
+  const position = [34.057219, -118.268751];
+  const [fetchData,setFetchData]=useState(0);
 const map = (
   <Map center={position} zoom={13}>
     <TileLayer
@@ -25,6 +27,13 @@ const map = (
     <Marker position={position}>
       <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
     </Marker>
+    {meter.map((m)=>(
+    <Marker position={meter.length?[m.LAT,m.LNG]:position}>
+      <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
+    </Marker>)
+  )}
+
+
   </Map>
 )
   const endpoint='http://localhost:4000';
@@ -36,20 +45,41 @@ const map = (
   //   })
   // });
 
-  async function run(){
-    const test = await fetch(endpoint);
-    const data = JSON.parse(JSON.stringify(test));
-    console.log(data);
+
+
+  useEffect(()=>{
+    async function run(){
+      let test = await fetch(endpoint);
+      const data =await test.json();//.then((r)=>{
+      setMeter(data);
+      console.log(meter);
+      console.log(data);
+      setFetchData(1);
+      console.log(fetchData);
+
+
+    }
+    run();
+  },[]);
+
+  console.log("hello");
+
+  function rerender(){
+    setFetchData(3);
+    console.log(meter);
+    console.log(fetchData);
   }
-  run();
 
 
   return(
     <div className='map_container'>
       <h1>Los Angeles Parking Meter's Occupancy State</h1>
       {map}
+      <button onClick={rerender}>Click to re-renter</button>
 
     </div>
+
+
   )
 }
 
