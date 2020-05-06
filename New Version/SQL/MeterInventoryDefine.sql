@@ -8,6 +8,8 @@ CREATE TABLE MeterInventory (
   ParkingPolicy VARCHAR2(128),
   StreetCleaning VARCHAR2(26),
   LatLng VARCHAR2(100)
+  Lat FLOAT,
+  LNG FLOAT,
 );
 
 create view lastStatus(spaceid, last_update, occupancystate)

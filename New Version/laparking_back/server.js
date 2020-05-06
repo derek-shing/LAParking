@@ -1,3 +1,5 @@
+//sudo apt-get install libaio1
+
 const express = require('express');
 
 const app = express();
@@ -13,9 +15,9 @@ async function run() {
 
   try {
     connection =  await oracledb.getConnection(  {
-      user          : "system",
-      password      : "H9G26XZt",
-      connectString : "localhost:1521"
+      user          : "ADMIN",
+      password      : "",
+      connectString : "laparking_medium"
     });
 
     result =  await connection.execute(
@@ -50,8 +52,8 @@ app.get("/",async (req, res)=>{
   res.send(JSON.parse(JSON.stringify(r.rows)));
 
 });
-app.listen(4000,function (){
-  console.log('server listening on port 4000....');
+app.listen(5000,function (){
+  console.log('server listening on port 5000....');
 })
 
 //somechange

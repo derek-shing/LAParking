@@ -1,0 +1,33 @@
+How many meter has sensor?
+4716
+
+How many records do each sensor have?
+select * from frequence
+
+Create interval of each records of each sensor?
+
+Create view interval1 (spaceid, occupancystate, eventtime, prev, diff)
+as
+select  spaceid, occupancystate,eventtime,
+lag(eventtime,1) over(partition by spaceid order by eventtime)as prev,
+(eventtime - lag(eventtime,1) over(partition by spaceid order by eventtime))*24*60 as diff
+from status;
+
+
+
+
+How frequent?
+
+create view update_interval(spaceid, occupancystate, eventtime, prev, diff, avg_update_time)
+as
+select spaceid, occupancystate, eventtime, prev, diff,
+avg(diff) over(partition by spaceid) as avg_update_time
+from interval1
+order by avg_update_time;
+
+
+Why some are more frequent than other ?
+is it depend on area or time?
+
+Consider cut off those record with is over 10 min.
+Consider cut off those record with distance over 1 mile.

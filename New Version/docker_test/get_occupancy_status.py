@@ -24,7 +24,9 @@ df_occ['eventtime'] = df_occ['eventtime'].apply(d)
 # dsn = o.makedsn("localhost","1521")
 # con = o.connect(user="system", password="",dsn=dsn)
 
-os.environ['TNS_ADMIN'] = "/test/Wallet_LAPARKING_docker"
+path =os.getcwd()
+print(path)
+os.environ['TNS_ADMIN'] = "/test/Wallet_LAPARKING"
 con = o.connect("ADMIN","",'laparking_medium')
 
 c = con.cursor()
