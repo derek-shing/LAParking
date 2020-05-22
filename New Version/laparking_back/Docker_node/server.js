@@ -54,6 +54,12 @@ app.get("/",async (req, res)=>{
 
 
 app.listen(5000,function (){
+  const TNS_ADMIN = process.env.TNS_ADMIN;
+  console.log('TNS is '+TNS_ADMIN);
+  process.env.TNS_ADMIN="/test/Wallet_LAPARKING";
+  console.log('TNS is '+process.env.TNS_ADMIN);
+
+
   console.log('server listening on port 5000....');
 })
 
