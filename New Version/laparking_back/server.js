@@ -16,7 +16,7 @@ async function run() {
   try {
     connection =  await oracledb.getConnection(  {
       user          : "ADMIN",
-      password      : "H9G26XZtH9G26XZt&",
+      password      : "",
       connectString : "laparking_medium"
     });
 

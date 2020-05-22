@@ -1,4 +1,5 @@
 //sudo apt-get install libaio1
+//deploy to https://laparkingnodeserver2-xguycfwvma-uw.a.run.app/
 
 const express = require('express');
 
@@ -16,7 +17,7 @@ async function run() {
   try {
     connection =  await oracledb.getConnection(  {
       user          : "ADMIN",
-      password      : "H9G26XZtH9G26XZt&",
+      password      : "",
       connectString : "laparking_medium"
     });
 
@@ -52,14 +53,9 @@ app.get("/",async (req, res)=>{
   res.send(JSON.parse(JSON.stringify(r.rows)));
 });
 
+const port = process.env.PORT || 5000
 
-app.listen(5000,function (){
-  const TNS_ADMIN = process.env.TNS_ADMIN;
-  console.log('TNS is '+TNS_ADMIN);
-  process.env.TNS_ADMIN="/test/Wallet_LAPARKING";
-  console.log('TNS is '+process.env.TNS_ADMIN);
-
-
+app.listen(port,function (){
   console.log('server listening on port 5000....');
 })
 
